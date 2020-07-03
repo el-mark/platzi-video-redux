@@ -12,6 +12,7 @@ function handleSubmit(event) {
     type: 'ADD_SONG',
     payload: { title }
   })
+  console.log(event.target[0].value = '');
 }
 
 const initialState = [
@@ -52,7 +53,7 @@ function render() {
   playlist.forEach(item => {
     const template = document.createElement('p');
     template.textContent = item.title;
-    $container.prependChild(template);
+    $container.appendChild(template);
   });
 }
 render();
