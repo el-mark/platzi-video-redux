@@ -12,7 +12,7 @@ function handleSubmit(event) {
     type: 'ADD_SONG',
     payload: { title }
   })
-  console.log(event.target[0].value = '');
+  event.target[0].value = '';
 }
 
 const initialState = [
@@ -51,9 +51,10 @@ function render() {
   $container.innerHTML = '';
 
   playlist.forEach(item => {
-    const template = document.createElement('p');
-    template.textContent = item.title;
-    $container.appendChild(template);
+    const listElement = document.createElement('p');
+    listElement.onclick = () => { console.log('hola'); };
+    listElement.textContent = item.title;
+    $container.appendChild(listElement);
   });
 }
 render();
