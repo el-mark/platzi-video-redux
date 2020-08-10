@@ -4,30 +4,36 @@
   <meta charset="UTF-8">
   <title>Redux</title>
   <style>
-      body {
-        margin: 0;
-        background: lightgray;
-        font-family: Arial;
-        padding-top: 55px;
-        }
-        form {
-        padding: 10px;
-        position: fixed;
-        top: 0;
-        box-sizing: border-box;
-        width: 100%;
-        }
-        input {
-        width: 100%;
-        padding: 10px;
-        font-size: 18px;
-        box-sizing: border-box;
-        }
-        p {
-        margin: 10px;
-        background: black;
-        color: white;
-        padding: 5px;
+    body {
+      margin: 0;
+      background: lightgray;
+      font-family: Arial;
+      padding-top: 55px;
+    }
+    form {
+      padding: 10px;
+      position: fixed;
+      top: 0;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 18px;
+      box-sizing: border-box;
+    }
+    p {
+      margin: 10px;
+      background: black;
+      color: white;
+      padding: 5px;
+    }
+    #delete-btn {
+      margin: 10px;
+      background: rgb(108, 25, 25);
+      color: white;
+      padding: 5px;
     }
   </style>
 </head>
@@ -36,6 +42,7 @@
         <input type="text" name="title" placeholder="Nombre de la canción" /> 
     </form>
     <div id="playlist"></div>
+    <div id="delete-btn">Borrar</div>
   <script src="http://localhost:9000/js/redux.js"></script>
 </body>
 </html>

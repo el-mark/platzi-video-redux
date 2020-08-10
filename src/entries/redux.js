@@ -1,8 +1,11 @@
 import { createStore } from 'redux';
 
 const $form = document.getElementById('form');
-
 $form.addEventListener('submit', handleSubmit);
+
+const $deleteBtn = document.getElementById('delete-btn');
+$deleteBtn.addEventListener('click', deleteLastElement);
+
 
 function handleSubmit(event) {
   event.preventDefault();
@@ -13,6 +16,12 @@ function handleSubmit(event) {
     payload: { title }
   })
   event.target[0].value = '';
+}
+
+function deleteLastElement(event) {
+  store.dispatch({
+    type: 'DELETE_LAST_SONG'
+  })
 }
 
 const initialState = [
@@ -31,6 +40,11 @@ const reducer = function (state, action) {
   switch (action.type) {
     case 'ADD_SONG':
       return [...state, action.payload]
+
+    case 'DELETE_LAST_SONG':
+      let playlist = [...state]
+      playlist.pop()
+      return playlist
 
     default:
       return state
