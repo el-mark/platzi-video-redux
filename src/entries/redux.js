@@ -4,7 +4,7 @@ const $form = document.getElementById('form');
 $form.addEventListener('submit', handleSubmit);
 
 const $deleteBtn = document.getElementById('delete-btn');
-$deleteBtn.addEventListener('click', deleteLastElement);
+$deleteBtn.addEventListener('click', removeLastElement);
 
 
 function handleSubmit(event) {
@@ -14,13 +14,13 @@ function handleSubmit(event) {
   store.dispatch({
     type: 'ADD_SONG',
     payload: { title }
-  })
+  });
   event.target[0].value = '';
 }
 
-function deleteLastElement(event) {
+function removeLastElement(event) {
   store.dispatch({
-    type: 'DELETE_LAST_SONG'
+    type: 'REMOVE_LAST_SONG'
   })
 }
 
@@ -41,10 +41,16 @@ const reducer = function (state, action) {
     case 'ADD_SONG':
       return [...state, action.payload]
 
-    case 'DELETE_LAST_SONG':
+    case 'REMOVE_LAST_SONG':
       let playlist = [...state]
       playlist.pop()
       return playlist
+
+    case 'REMOVE_SONG':
+      let playlistToRemove = [...state]
+      console.log(action.payload.position);
+      playlistToRemove.splice(action.payload.position, 1)
+      return playlistToRemove
 
     default:
       return state
@@ -64,9 +70,19 @@ function render() {
   const playlist = store.getState();
   $container.innerHTML = '';
 
-  playlist.forEach(item => {
+  playlist.forEach((item, index) => {
     const listElement = document.createElement('p');
-    listElement.onclick = () => { console.log('hola'); };
+    listElement.onclick = (event) => {
+      // console.log(index);
+      store.dispatch({
+        type: 'REMOVE_SONG',
+        payload: { 
+          position: index
+        }
+      });
+    }
+
+
     listElement.textContent = item.title;
     $container.appendChild(listElement);
   });
